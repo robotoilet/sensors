@@ -8,17 +8,15 @@
 #define TestSensor_h
 
 #include "Arduino.h"
-#include "Process.h"
 #include "FileIO.h"
+#include "Sensor.h"
 
-class TestSensor
-{
+class TestSensor : public Sensor {
   public:
-    TestSensor(byte);
+    TestSensor(char aName) : Sensor(aName) {};
 
-    byte name; // name of the sensor
-
-    void collectData(File);
+  protected:
+    virtual void getData(char*);
 };
 
 #endif
