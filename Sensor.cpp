@@ -13,7 +13,7 @@
 #define CLOSE_DATAPOINT ')'
 #define SEPARATOR ' '
 
-#define VALUE_SIZE 10
+#define MAX_VALUE_SIZE 10
 
 // Constructor
 Sensor::Sensor(char aName) : name(aName) {}
@@ -31,15 +31,25 @@ void Sensor::collectData(File f, char* timestamp) {
       f.print(c);
   }
   f.print(SEPARATOR);
-  char chArray[VALUE_SIZE];
+  char chArray[MAX_VALUE_SIZE];
   getData(chArray);
-  for (byte i=0;i<VALUE_SIZE;i++) {
+  for (byte i=0;i<valueSize;i++) {
     f.print(chArray[i]);
   }
-  f.print(random(255));
   f.print(CLOSE_DATAPOINT);
 }
 
+// Helper function that can be used to write a number `n` (long) to a string
+// array;
+// It also updates the `valueSize` data member with the actual
+// number of digits of `n`.
 void Sensor::longToChArray(long n, char* chArray) {
-   sprintf(chArray, "%ld", n);
+  valueSize = getDigitsOfLong(n);
+  sprintf(chArray, "%ld", n);
+}
+
+int Sensor::getDigitsOfLong(long number) {
+  int digits = 0;
+  do { number /= 10; digits++; } while (number != 0);
+  return digits;
 }

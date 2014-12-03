@@ -21,6 +21,8 @@ class Sensor
     char name;
     virtual void getData(char*) = 0;
     void longToChArray(long, char*);
+    int getDigitsOfLong(long);
+    int valueSize;
 };
 
 #endif
