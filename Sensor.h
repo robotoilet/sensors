@@ -37,7 +37,7 @@ class Sensor {
       getData(chArray);
       strcat(dataPoint, chArray);
       strcat(dataPoint, CLOSE_DATAPOINT);
-      b.write(filePath, filePathLength, dataPoint);
+      b.write(filePath, dataPoint, MAX_DATAPOINT_SIZE);
     }
 
   protected:
