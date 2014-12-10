@@ -42,21 +42,14 @@ class Sensor {
 
   protected:
     char name;
-    int valueSize;
 
     // Write a number `n` (long) to a string array;
     // Also updates the `valueSize` data member with the actual
     // number of digits of `n`.
     void longToChArray(long n, char* chArray) {
-      valueSize = getDigitsOfLong(n);
       sprintf(chArray, "%ld", n);
     }
 
-    int getDigitsOfLong(long number) {
-      int digits = 0;
-      do { number /= 10; digits++; } while (number != 0);
-      return digits;
-    }
 
     // to be implemented by subclasses
     virtual void getData(char*) = 0;
