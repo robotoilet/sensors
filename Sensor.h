@@ -29,6 +29,7 @@ class Sensor {
     // Creates a dataPoint of format "(<sensorName> <timestamp> <value>)" and
     // asks the given Board instance to write it.
     void collectData(char* filePath, byte filePathLength, char* timestamp, B b) {
+      Serial.println("filepath in collectData: " + String(filePath));
       char dataPoint[MAX_DATAPOINT_SIZE] = { OPEN_DATAPOINT, name };
       strcat(dataPoint, SEPARATOR);
       strcat(dataPoint, timestamp);
