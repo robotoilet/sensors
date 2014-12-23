@@ -24,25 +24,27 @@ template<typename B>
 class Sensor {
 
   public:
-    Sensor(char aName) : name(aName) {}
+    Sensor(char aName, B* aB) : name(aName),b(aB) {}
 
     // Creates a dataPoint of format "(<sensorName> <timestamp> <value>)" and
     // asks the given Board instance to write it.
-    void collectData(char* filePath, char* timestamp, B b) {
-      Serial.println("filepath in collectData: " + String(filePath));
-      char dataPoint[MAX_DATAPOINT_SIZE] = { OPEN_DATAPOINT, name };
-      strcat(dataPoint, SEPARATOR);
-      strcat(dataPoint, timestamp);
-      strcat(dataPoint, SEPARATOR);
-      char chArray[MAX_VALUE_SIZE];
-      getData(chArray);
-      strcat(dataPoint, chArray);
-      strcat(dataPoint, CLOSE_DATAPOINT);
-      b.write(filePath, dataPoint, MAX_DATAPOINT_SIZE);
+    void collectData() {
+      if (b->checkCounter()) {
+        char dataPoint[MAX_DATAPOINT_SIZE] = { OPEN_DATAPOINT, name, '\0' };
+        strcat(dataPoint, SEPARATOR);
+        strcat(dataPoint, b->unixTimestamp);
+        strcat(dataPoint, SEPARATOR);
+        char chArray[MAX_VALUE_SIZE];
+        getData(chArray);
+        strcat(dataPoint, chArray);
+        strcat(dataPoint, CLOSE_DATAPOINT);
+        b->write(dataPoint, MAX_DATAPOINT_SIZE);
+      }
     }
 
   protected:
     char name;
+    B* b;
 
     // Write a number `n` (long) to a string array;
     // Also updates the `valueSize` data member with the actual

@@ -14,7 +14,7 @@ template<typename B>
 
 class TestSensor : public Sensor<B> {
   public:
-    TestSensor(char aName) : Sensor<B>(aName) {};
+    TestSensor(char aName, B* aB) : Sensor<B>(aName, aB) {};
 
   protected:
     virtual void getData(char* chArray) {
