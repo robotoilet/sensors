@@ -10,15 +10,13 @@
 #include "Arduino.h"
 #include "Sensor.h"
 
-template<typename B>
 
-class TestSensor : public Sensor<B> {
+class TestSensor : public Sensor {
   public:
-    TestSensor(char aName, B* aB) : Sensor<B>(aName, aB) {};
+    TestSensor(char aName, unsigned long res) : Sensor(aName, res) {};
 
-  protected:
     virtual void getData(char* chArray) {
-      Sensor<B>::longToChArray(random(255), chArray);
+      Sensor::longToChArray(random(255), chArray);
     }
 };
 
