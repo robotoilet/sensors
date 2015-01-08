@@ -17,8 +17,8 @@ class Sensor {
 
     char name;
 
-    bool wantsToReport(unsigned long milliSeconds) {
-      return milliSeconds % resolution == 0;
+    bool wantsToReport(unsigned long seconds) {
+      return seconds % resolution == 0;
     }
 
     // to be implemented by subclasses
