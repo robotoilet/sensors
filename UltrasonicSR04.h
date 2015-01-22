@@ -4,8 +4,8 @@
 */
 
 // ensure this library description is only included once
-#ifndef Ultrasonic_h
-#define Ultrasonic_h
+#ifndef UltrasonicSR04_h
+#define UltrasonicSR04_h
 
 #include "Arduino.h"
 #include "Sensor.h"
